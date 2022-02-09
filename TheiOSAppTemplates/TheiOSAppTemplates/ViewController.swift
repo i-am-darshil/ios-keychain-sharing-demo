@@ -22,7 +22,50 @@ class ViewController: UIViewController {
     guard let userName = self.userNameTextField.text,
       let password = self.passwordTextField.text else { return }
     
+    // Method 2 block starts
+    var appIdentifierPrefix = ""
+    
+    let queryLoad: [String: AnyObject] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrAccount as String: "bundleSeedID" as AnyObject,
+                kSecAttrService as String: "" as AnyObject,
+                kSecReturnAttributes as String: kCFBooleanTrue
+            ]
+    var result : AnyObject?
+            var status = withUnsafeMutablePointer(to: &result) {
+                SecItemCopyMatching(queryLoad as CFDictionary, UnsafeMutablePointer($0))
+            }
+
+            if status == errSecItemNotFound {
+                status = withUnsafeMutablePointer(to: &result) {
+                    SecItemAdd(queryLoad as CFDictionary, UnsafeMutablePointer($0))
+                }
+            }
+    
+    if status == noErr {
+                if let resultDict = result as? [String: Any], let accessGroup = resultDict[kSecAttrAccessGroup as String] as? String {
+                    let components = accessGroup.components(separatedBy: ".")
+//                    return components.first
+                    appIdentifierPrefix = components.first!
+                    print("kSecAttrAccessGroup components.first : \(components.first!)")
+                }else {
+//                    return nil
+                    print("kSecAttrAccessGroup : Not found")
+                }
+            } else {
+                print("Error getting bundleSeedID to Keychain")
+//                return nil
+                print("kSecAttrAccessGroup : Not found")
+            }
+    
+    print("kSecAttrAccessGroup Done")
+    
+    // Method 2 block ends
+    
+    
     let keychain = KeychainSwift()
+    
+    // Method 1 block starts
     
 //    Problem
 //    keychain.accessGroup = "com.darshil.keychain-demo"
@@ -31,15 +74,20 @@ class ViewController: UIViewController {
 //        "8XPT93F9Q7.com.darshil.keychain-demo-main"
 //    )"
     
-//    Fix
-    let appIdentifierPrefix =
-        Bundle.main.infoDictionary!["AppIdentifierPrefix"] as! String
+//    Fix 1
+//    let appIdentifierPrefix =
+//        Bundle.main.infoDictionary!["AppIdentifierPrefix"] as! String
     
     //        Local
     //    keychain.accessGroup = "\(appIdentifierPrefix)com.darshil.keychain-demo"
             
     //        Browserstack
-    keychain.accessGroup = "\(appIdentifierPrefix)*"
+//    keychain.accessGroup = "\(appIdentifierPrefix)*" // Method 1
+    
+    // Method 1 block ends
+    
+    keychain.accessGroup = "\(appIdentifierPrefix).*" // Method 2
+    
     print("accessGroup : \(keychain.accessGroup!)")
     
     keychain.set(userName, forKey: "userName")
