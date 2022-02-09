@@ -23,7 +23,25 @@ class ViewController: UIViewController {
       let password = self.passwordTextField.text else { return }
     
     let keychain = KeychainSwift()
-    keychain.accessGroup = "123ABCXYZ.iOSAppTemplates"
+    
+//    Problem
+//    keychain.accessGroup = "com.darshil.keychain-demo"
+//    Feb  8 20:26:02 securityd[114] <Notice>: TheiOSAppTemplat[1678]/1#4 LF=0 add Error Domain=NSOSStatusErrorDomain Code=-34018 "Client explicitly specifies access group com.darshil.keychain-demo but is only entitled for (
+//        "8XPT93F9Q7.com.darshil.keychain-demo",
+//        "8XPT93F9Q7.com.darshil.keychain-demo-main"
+//    )"
+    
+//    Fix
+    let appIdentifierPrefix =
+        Bundle.main.infoDictionary!["AppIdentifierPrefix"] as! String
+    
+    //        Local
+    //    keychain.accessGroup = "\(appIdentifierPrefix)com.darshil.keychain-demo"
+            
+    //        Browserstack
+    keychain.accessGroup = "\(appIdentifierPrefix)*"
+    print("accessGroup : \(keychain.accessGroup!)")
+    
     keychain.set(userName, forKey: "userName")
     keychain.set(password, forKey: "password")
     

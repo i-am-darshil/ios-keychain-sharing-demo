@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>TheiOSAppTemplatesBlogs.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>56C4CD2344BE2C9D7E335BB4665608BC59FE797A</string>
+				<key>dateExpires</key>
+				<string>16/03/22</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>56C4CD2344BE2C9D7E335BB4665608BC59FE797A</string>
+						<key>dateExpires</key>
+						<string>16/03/22</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>KeychainSwift.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>8XPT93F9Q7</string>
+						<key>name</key>
+						<string>BinaryLife Inc</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>8XPT93F9Q7.com.darshil.keychain-demo-second</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>8XPT93F9Q7</string>
+				<key>get-task-allow</key>
+				<true/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>8XPT93F9Q7.com.darshil.keychain-demo</string>
+					<string>8XPT93F9Q7.*</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>TheiOSAppTemplatesBlogs.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>0effc8e1-71d3-49e5-8e5c-3415f718de64</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: com.darshil.keychain-demo-second</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>8XPT93F9Q7</string>
+				<key>name</key>
+				<string>BinaryLife Inc</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
